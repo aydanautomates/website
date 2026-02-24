@@ -646,49 +646,22 @@
     .testimonials-carousel {
       margin-top: 48px;
       overflow: hidden;
-      position: relative;
-    }
-
-    /* Fade edges */
-    .testimonials-carousel::before,
-    .testimonials-carousel::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 80px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .testimonials-carousel::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg-light), transparent);
-    }
-
-    .testimonials-carousel::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg-light), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
+      mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
     }
 
     .testimonials-track {
       display: flex;
       gap: 24px;
-      animation: scrollCarousel 60s linear infinite;
       width: max-content;
     }
 
-    .testimonials-carousel:hover .testimonials-track {
-      animation-play-state: paused;
+    .testimonials-carousel {
+      cursor: grab;
     }
 
-    @keyframes scrollCarousel {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+    .testimonials-carousel.dragging {
+      cursor: grabbing;
     }
 
     .testimonial-card {
@@ -1111,18 +1084,14 @@
         font-size: 1.05rem;
       }
 
-      .testimonials-track {
-        animation-duration: 80s;
-      }
-
       .testimonial-card {
         min-width: 300px;
         max-width: 300px;
       }
 
-      .testimonials-carousel::before,
-      .testimonials-carousel::after {
-        width: 40px;
+      .testimonials-carousel {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+        mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
       }
 
       .about-photo {
@@ -1867,14 +1836,89 @@
         });
       }
 
-      // ===== CAROUSEL TOUCH PAUSE =====
+      // ===== TESTIMONIAL CAROUSEL =====
+      var carousel = document.querySelector('.testimonials-carousel');
       var carouselTrack = document.querySelector('.testimonials-track');
-      if (carouselTrack) {
-        carouselTrack.addEventListener('touchstart', function () {
-          carouselTrack.style.animationPlayState = 'paused';
+      if (carousel && carouselTrack) {
+        var isAutoScrolling = true;
+        var isDragging = false;
+        var dragStartX = 0;
+        var dragScrollLeft = 0;
+
+        function getResetPoint() {
+          return carouselTrack.scrollWidth / 2;
+        }
+
+        // Full loop duration in seconds: desktop 165s, mobile 220s
+        var duration = window.innerWidth >= 768 ? 165 : 220;
+        var scrollSpeed = getResetPoint() / (duration * 60);
+        var subPixel = 0;
+
+        function tick() {
+          if (isAutoScrolling && !isDragging) {
+            subPixel += scrollSpeed;
+            if (subPixel >= 1) {
+              var px = Math.floor(subPixel);
+              carousel.scrollLeft += px;
+              subPixel -= px;
+            }
+            if (carousel.scrollLeft >= getResetPoint()) {
+              carousel.scrollLeft -= getResetPoint();
+            }
+          }
+          requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+
+        // Desktop: pause on hover
+        carousel.addEventListener('mouseenter', function () {
+          if (!isDragging) isAutoScrolling = false;
+        });
+        carousel.addEventListener('mouseleave', function () {
+          if (!isDragging) isAutoScrolling = true;
+        });
+
+        // Desktop: drag to scroll
+        carousel.addEventListener('mousedown', function (e) {
+          isDragging = true;
+          isAutoScrolling = false;
+          dragStartX = e.pageX;
+          dragScrollLeft = carousel.scrollLeft;
+          carousel.classList.add('dragging');
+          e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          var dx = e.pageX - dragStartX;
+          carousel.scrollLeft = dragScrollLeft - dx;
+        });
+
+        document.addEventListener('mouseup', function () {
+          if (!isDragging) return;
+          isDragging = false;
+          isAutoScrolling = true;
+          carousel.classList.remove('dragging');
+        });
+
+        // Mobile: touch to scroll
+        carousel.addEventListener('touchstart', function (e) {
+          isDragging = true;
+          isAutoScrolling = false;
+          dragStartX = e.touches[0].pageX;
+          dragScrollLeft = carousel.scrollLeft;
         }, { passive: true });
-        carouselTrack.addEventListener('touchend', function () {
-          carouselTrack.style.animationPlayState = 'running';
+
+        carousel.addEventListener('touchmove', function (e) {
+          if (!isDragging) return;
+          var dx = e.touches[0].pageX - dragStartX;
+          carousel.scrollLeft = dragScrollLeft - dx;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function () {
+          isDragging = false;
+          isAutoScrolling = true;
         });
       }
 
