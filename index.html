@@ -933,6 +933,82 @@
     }
 
     /* ========================================
+       CONTACT FORM
+       ======================================== */
+    .contact-form {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.5;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-dim);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--text-muted);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .form-success p {
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .form-success .success-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    /* ========================================
        SCROLL ANIMATIONS
        ======================================== */
     .fade-up {
@@ -1469,8 +1545,31 @@
       <div class="container">
         <h2 class="section-headline fade-up">Let's chat.</h2>
         <p class="final-cta-sub fade-up">Ready for a free consultation call? Let's identify your goals, explore your workflows, and discover if this is a good fit.</p>
-        <div class="fade-up">
-          <a href="#contact" class="btn-primary">Book Your Free Call</a>
+        <form class="contact-form fade-up" id="contact-form" action="/api/contact" method="POST">
+          <input type="text" name="_honeypot" style="position: absolute; left: -9999px;" tabindex="-1" autocomplete="off">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="business">Business / Company <span style="color: var(--text-dim); text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <input type="text" id="business" name="business" placeholder="Your business name">
+          </div>
+          <div class="form-group">
+            <label for="message">What can I help you with?</label>
+            <textarea id="message" name="message" placeholder="Tell me a bit about what you're looking for..." required></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn-primary">Send Message</button>
+          </div>
+        </form>
+        <div class="form-success" id="form-success">
+          <p>Message sent.</p>
+          <p class="success-sub">I'll be in touch soon.</p>
         </div>
       </div>
     </section>
@@ -1793,6 +1892,39 @@
       if (aboutPhoto) {
         aboutPhoto.addEventListener('click', function () {
           aboutPhoto.classList.toggle('tapped');
+        });
+      }
+
+      // ===== CONTACT FORM SUBMISSION =====
+      var contactForm = document.getElementById('contact-form');
+      var formSuccess = document.getElementById('form-success');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var formData = new FormData(contactForm);
+          var data = {};
+          formData.forEach(function (value, key) { data[key] = value; });
+          var submitBtn = contactForm.querySelector('button[type="submit"]');
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+
+          fetch(contactForm.action, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+          }).then(function (response) {
+            if (response.ok) {
+              contactForm.style.display = 'none';
+              formSuccess.style.display = 'block';
+            } else {
+              submitBtn.textContent = 'Something went wrong. Try again.';
+              submitBtn.disabled = false;
+            }
+          }).catch(function () {
+            submitBtn.textContent = 'Something went wrong. Try again.';
+            submitBtn.disabled = false;
+          });
         });
       }
 
