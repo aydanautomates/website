@@ -41,6 +41,12 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Name, email, and message are required.' });
   }
 
+  // Email format validation
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Please provide a valid email address.' });
+  }
+
   // Send email
   try {
     var transporter = nodemailer.createTransport({
