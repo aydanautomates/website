@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aydan Automates | AI Automation Consultant</title>
+  <meta name="description" content="I help small business owners and solo operators cut through the noise, set up the right AI tools, and build systems that actually save time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg-light: #111111;
+      --bg-card: #1A1A1A;
+      --bg-card-hover: #222222;
+      --border: #2A2A2A;
+      --text: #F5F5F5;
+      --text-muted: #888888;
+      --text-dim: #666666;
+      --font-mono: 'PT Mono', monospace;
+      --font-sans: 'PT Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle grain texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+
+    /* Skip to content link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 10001;
+      padding: 12px 24px;
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    h1, h2, h3 {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: rgba(26, 26, 26, 0.5);
+    }
+
+    .section-headline {
+      font-size: clamp(1.85rem, 4.5vw, 3rem);
+      margin-bottom: 28px;
+      line-height: 1.15;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #CCCCCC;
+    }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      section {
+        padding: 120px 0;
+      }
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 16px 36px;
+      background: var(--text);
+      color: var(--bg);
+      border: 2px solid var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      min-height: 44px;
+      min-width: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(10, 10, 10, 0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    .btn-primary:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: transparent;
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0 24px;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      background: rgba(10, 10, 10, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: 48px;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .nav-links a:not(.btn-primary)::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:not(.btn-primary):hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-links .btn-primary {
+      padding: 10px 24px;
+      font-size: 0.75rem;
+    }
+
+    .nav-links .btn-primary:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    @media (min-width: 768px) {
+      .nav-hamburger {
+        display: none;
+      }
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.97);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-mobile.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-mobile a {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 24px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--text-muted);
+    }
+
+    .nav-mobile .btn-primary {
+      margin-top: 16px;
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-top: 88px;
+      overflow: hidden;
+    }
+
+    /* Interactive particle canvas */
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: rgba(26, 26, 26, 0.5);
+    }
+
+    .hero-headline {
+      font-family: var(--font-mono);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline .scramble-text {
+      display: inline;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #AAAAAA;
+      margin-bottom: 40px;
+      max-width: 720px;
+    }
+
+    .hero-cta-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .hero-cta-note {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    /* Hero staggered animation */
+    .hero-label,
+    .hero-headline,
+    .hero-sub,
+    .hero-cta-wrapper {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-label { animation-delay: 0.2s; }
+    .hero-headline { animation-delay: 0.4s; }
+    .hero-sub { animation-delay: 0.6s; }
+    .hero-cta-wrapper { animation-delay: 0.8s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       CONTEXT SECTION
+       ======================================== */
+    .context {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .context-content {
+      max-width: 700px;
+    }
+
+    .context-content p:not(.section-label) {
+      font-size: 1.15rem;
+      line-height: 1.75;
+    }
+
+    /* ========================================
+       SERVICES SECTION
+       ======================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      position: relative;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Card hover glow effect */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover {
+      background: var(--bg-card-hover);
+      border-color: #333;
+      transform: translateY(-4px);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-category {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: #AAAAAA;
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+
+    .service-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-top: 24px;
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+
+    .service-arrow:hover {
+      color: var(--text);
+      gap: 12px;
+    }
+
+    .service-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ========================================
+       TESTIMONIALS SECTION (Carousel)
+       ======================================== */
+    .testimonials {
+      background: var(--bg-light);
+      overflow: hidden;
+    }
+
+    .testimonials-carousel {
+      margin-top: 48px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Fade edges */
+    .testimonials-carousel::before,
+    .testimonials-carousel::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .testimonials-carousel::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg-light), transparent);
+    }
+
+    .testimonials-carousel::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg-light), transparent);
+    }
+
+    .testimonials-track {
+      display: flex;
+      gap: 24px;
+      animation: scrollCarousel 40s linear infinite;
+      width: max-content;
+    }
+
+    .testimonials-carousel:hover .testimonials-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollCarousel {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 360px;
+      max-width: 360px;
+      flex-shrink: 0;
+      transition: border-color 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: #333;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-stars svg {
+      width: 18px;
+      height: 18px;
+      fill: #D4A843;
+    }
+
+    .testimonial-card blockquote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #CCCCCC;
+      font-style: normal;
+      margin-bottom: 28px;
+      flex-grow: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .testimonial-pfp {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .testimonial-pfp span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .testimonial-author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-name {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .testimonial-name a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .testimonial-name a:hover {
+      color: var(--text-muted);
+    }
+
+    .testimonial-role {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    .testimonial-company {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+
+    /* ========================================
+       ABOUT SECTION
+       ======================================== */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .about-layout {
+        grid-template-columns: 340px 1fr;
+        gap: 64px;
+        align-items: stretch;
+      }
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .about-photo {
+        margin: 0;
+        max-width: 100%;
+        aspect-ratio: auto;
+        height: 100%;
+      }
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      filter: grayscale(100%) contrast(1.15) brightness(0.92);
+      transition: filter 0.5s ease;
+    }
+
+    .about-photo:hover img,
+    .about-photo.tapped img {
+      filter: grayscale(0%) contrast(1) brightness(1);
+    }
+
+    .about-photo-initials {
+      font-family: var(--font-mono);
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--border);
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ========================================
+       FINAL CTA SECTION
+       ======================================== */
+    .final-cta {
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial glow behind CTA */
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(245, 245, 245, 0.02) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .final-cta .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta .section-headline {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta-sub {
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      padding: 4px 0;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--text);
+    }
+
+    /* ========================================
+       SCROLL ANIMATIONS
+       ======================================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger-children .fade-up:nth-child(1) { transition-delay: 0s; }
+    .stagger-children .fade-up:nth-child(2) { transition-delay: 0.12s; }
+    .stagger-children .fade-up:nth-child(3) { transition-delay: 0.24s; }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 767px) {
+      section {
+        padding: 72px 0;
+      }
+
+      .hero {
+        min-height: 100dvh;
+        min-height: -webkit-fill-available;
+      }
+
+      .nav-logo span {
+        font-size: 1.3rem;
+        letter-spacing: 0.12em;
+      }
+
+      .nav-logo img {
+        height: 36px;
+        width: 36px;
+      }
+
+      .nav-inner {
+        height: 72px;
+      }
+
+      .hero {
+        padding-top: 72px;
+      }
+
+      .hero-sub {
+        font-size: 1.05rem;
+      }
+
+      .service-card {
+        padding: 32px 24px;
+      }
+
+      .context-content p:not(.section-label) {
+        font-size: 1.05rem;
+      }
+
+      .testimonial-card {
+        min-width: 300px;
+        max-width: 300px;
+      }
+
+      .testimonials-carousel::before,
+      .testimonials-carousel::after {
+        width: 40px;
+      }
+
+      .about-photo {
+        max-width: 260px;
+      }
+
+      .final-cta-sub {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .nav-logo span {
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+      }
+
+      .nav-logo img {
+        height: 32px;
+        width: 32px;
+      }
+
+      .nav-logo {
+        gap: 10px;
+      }
+
+      .hero-headline {
+        font-size: 2rem;
+      }
+
+      .section-headline {
+        font-size: 1.6rem;
+      }
+
+      .testimonial-card {
+        min-width: 270px;
+        max-width: 270px;
+        padding: 28px 24px;
+      }
+
+      .btn-primary {
+        padding: 14px 28px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* ========================================
+       REDUCED MOTION
+       ======================================== */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-label,
+      .hero-headline,
+      .hero-sub,
+      .hero-cta-wrapper {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .service-card:hover,
+      .testimonial-card:hover {
+        transform: none;
+      }
+
+      .btn-primary:hover {
+        transform: none;
+      }
+
+      .testimonials-track {
+        animation: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+      }
+
+      .testimonial-card {
+        scroll-snap-align: start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to content -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Aydan Automates, home">
+        <img src="logo.svg" alt="Aydan Automates logo">
+        <span>Aydan Automates</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="btn-primary">Book a Call</a></li>
+      </ul>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="nav-mobile" aria-hidden="true">
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-primary">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-label">Your Human Guide to AI</p>
+          <h1 class="hero-headline"><span class="scramble-text" data-text="It's time AI starts working for you.">It's time AI starts working for you.</span></h1>
+          <p class="hero-sub">Coaching, consulting, and custom AI solutions that actually save you time and money. Built around your goals, your workflows, and the tools you already trust.</p>
+          <div class="hero-cta-wrapper">
+            <a href="#contact" class="btn-primary">Book Your Free Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTEXT -->
+    <section class="context">
+      <div class="container">
+        <div class="context-content">
+          <p class="section-label fade-up">The Situation</p>
+          <h2 class="section-headline fade-up">Let's be real.</h2>
+          <p class="fade-up">You already know AI can save you time. The hard part is figuring out <em>how</em>. Where do you start? What tools are actually worth it? How do you make any of it fit into the way you already work? I help you answer these questions confidently, build systems that actually work, and guide you every step of the way.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="container">
+        <p class="section-label fade-up">Services</p>
+        <h2 class="section-headline fade-up">What I do.</h2>
+        <div class="services-grid stagger-children">
+
+          <div class="service-card fade-up">
+            <div class="service-category">Coaching</div>
+            <h3>AI Coaching</h3>
+            <p>You want to learn this stuff yourself? I'll sit down with you 1-on-1 and show you exactly how to use AI in your day-to-day. No fluff, just the tools and workflows that actually make a difference.</p>
+            <a href="#contact" class="service-arrow">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+
+          <div class="service-card fade-up">
+            <div class="service-category">Consulting</div>
+            <h3>AI Consulting</h3>
+            <p>Tell me what your week looks like and I'll tell you what shouldn't be on your plate. I'll map out exactly what to automate and help you get it done.</p>
+            <a href="#contact" class="service-arrow">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+
+          <div class="service-card fade-up">
+            <div class="service-category">Done For You</div>
+            <h3>Done-For-You Systems</h3>
+            <p>Don't want to touch any of it? I'll build the whole thing for you. Automations, tools, workflows. You just get a system that works.</p>
+            <a href="#contact" class="service-arrow">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <p class="section-label fade-up">Testimonials</p>
+        <h2 class="section-headline fade-up">What people are saying.</h2>
+      </div>
+      <div class="testimonials-carousel">
+        <div class="testimonials-track">
+
+          <!-- Card 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I reached out to Aydan as I needed help navigating the AI space and figuring out how I could incorporate AI into my existing workflows. With a quick introductory phone call, Aydan helped me build a roadmap to the specific tools I could use to integrate with my business successfully. By working with Aydan, I was able navigate the AI space and 10x my productivity.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>CC</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/calebcart/" target="_blank" rel="noopener noreferrer">Caleb Carter</a></p>
+                <p class="testimonial-role">Data Analyst</p>
+                <p class="testimonial-company">Michaud Capital</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I honestly found AI overwhelming until I hired Aydan as my consultant. He was able to help me cut through the noise of all the different products and help me focus on only what I need to achieve my goals. With his help I've been able to systemize my workload and save A TON of time on the tasks AI has now taken over. I can't thank him enough for the guidance. I highly recommend him!</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>BG</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/bastian-gonzalez-825a11192/" target="_blank" rel="noopener noreferrer">Bastian Gonzalez</a></p>
+                <p class="testimonial-role">Real Estate Agent</p>
+                <p class="testimonial-company">Coldwell Banker King</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I've known Aydan for a while and watched him go deep on AI. He's the type who actually understands how the tools work and thinks through real applications, not just hype. If you're looking for someone who can help you figure out where AI fits in your business, he's definitely worth a conversation.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>ZW</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/zachary-wilson-/" target="_blank" rel="noopener noreferrer">Zach Wilson</a></p>
+                <p class="testimonial-role">Founder & CEO</p>
+                <p class="testimonial-company">AutomateRE</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I'm so happy I worked with Aydan. Before I reached out to him, I didn't know I could vibe code. I assumed you had to be a software engineer to use these tools. With Aydan's guidance, I realized how much I could actually do and started building my own tools within days.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>MV</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/manuel-vilaro-636592140/" target="_blank" rel="noopener noreferrer">Manuel Vilaro</a></p>
+                <p class="testimonial-role">Senior Project Engineer</p>
+                <p class="testimonial-company">Clayco</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>As a contract handler, there is so much busy work I have to deal with daily. Aydan helped me get started with the right AI tools and worked closely with me to develop workflows that turn a weeks worth of work into hours.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>JC</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/jesus-contreras-847b42394/" target="_blank" rel="noopener noreferrer">Jesus Contreras</a></p>
+                <p class="testimonial-role">Contracting Officer</p>
+                <p class="testimonial-company">United States Marine Corps</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>Aydan really knows his stuff. If he's not your go-to AI guy, you're missing out.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>AL</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/alexander-liteplo/" target="_blank" rel="noopener noreferrer">Alexander Liteplo</a></p>
+                <p class="testimonial-role">Creator</p>
+                <p class="testimonial-company">RentAHuman.ai</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duplicated for infinite scroll -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I reached out to Aydan as I needed help navigating the AI space and figuring out how I could incorporate AI into my existing workflows. With a quick introductory phone call, Aydan helped me build a roadmap to the specific tools I could use to integrate with my business successfully. By working with Aydan, I was able navigate the AI space and 10x my productivity.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>CC</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/calebcart/" target="_blank" rel="noopener noreferrer">Caleb Carter</a></p>
+                <p class="testimonial-role">Data Analyst</p>
+                <p class="testimonial-company">Michaud Capital</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I honestly found AI overwhelming until I hired Aydan as my consultant. He was able to help me cut through the noise of all the different products and help me focus on only what I need to achieve my goals. With his help I've been able to systemize my workload and save A TON of time on the tasks AI has now taken over. I can't thank him enough for the guidance. I highly recommend him!</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>BG</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/bastian-gonzalez-825a11192/" target="_blank" rel="noopener noreferrer">Bastian Gonzalez</a></p>
+                <p class="testimonial-role">Real Estate Agent</p>
+                <p class="testimonial-company">Coldwell Banker King</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I've known Aydan for a while and watched him go deep on AI. He's the type who actually understands how the tools work and thinks through real applications, not just hype. If you're looking for someone who can help you figure out where AI fits in your business, he's definitely worth a conversation.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>ZW</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/zachary-wilson-/" target="_blank" rel="noopener noreferrer">Zach Wilson</a></p>
+                <p class="testimonial-role">Founder & CEO</p>
+                <p class="testimonial-company">AutomateRE</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>I'm so happy I worked with Aydan. Before I reached out to him, I didn't know I could vibe code. I assumed you had to be a software engineer to use these tools. With Aydan's guidance, I realized how much I could actually do and started building my own tools within days.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>MV</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/manuel-vilaro-636592140/" target="_blank" rel="noopener noreferrer">Manuel Vilaro</a></p>
+                <p class="testimonial-role">Senior Project Engineer</p>
+                <p class="testimonial-company">Clayco</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>As a contract handler, there is so much busy work I have to deal with daily. Aydan helped me get started with the right AI tools and worked closely with me to develop workflows that turn a weeks worth of work into hours.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>JC</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/jesus-contreras-847b42394/" target="_blank" rel="noopener noreferrer">Jesus Contreras</a></p>
+                <p class="testimonial-role">Contracting Officer</p>
+                <p class="testimonial-company">United States Marine Corps</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+              <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+            </div>
+            <blockquote>Aydan really knows his stuff. If he's not your go-to AI guy, you're missing out.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><span>AL</span></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/alexander-liteplo/" target="_blank" rel="noopener noreferrer">Alexander Liteplo</a></p>
+                <p class="testimonial-role">Creator</p>
+                <p class="testimonial-company">RentAHuman.ai</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="container">
+        <p class="section-label fade-up">About</p>
+        <h2 class="section-headline fade-up">Who I am.</h2>
+        <div class="about-layout">
+          <div class="about-photo fade-up">
+            <img src="LinkedIn PFP.png" alt="Aydan, AI Automation Consultant" style="display: block;">
+            <span class="about-photo-initials" style="display: none;">AA</span>
+          </div>
+          <div class="about-text">
+            <p class="fade-up">Hey, I'm Aydan. I've spent the last 4 years diving deep into the AI space, learning the tools, testing what works, and helping entrepreneurs and small teams save time with automation systems.</p>
+            <p class="fade-up">I don't come from a technical background, and honestly, that's been my biggest advantage. I know what it's like to feel overwhelmed by all of this. I know the frustrations. And I know how to talk about it in ways that actually make sense. I learned everything from scratch so you don't have to.</p>
+            <p class="fade-up">If you're looking for someone who gets AI and can help you succeed with it, let's have a conversation.</p>
+            <div class="fade-up" style="margin-top: 16px;">
+              <a href="https://www.linkedin.com/in/aydan-arroyo/" target="_blank" rel="noopener noreferrer" class="service-arrow" style="font-size: 1rem;"><img src="linkedin-icon-logo-black-and-white.png" alt="LinkedIn" style="width: 22px; height: 22px; filter: brightness(0) invert(1);"> CONNECT WITH ME <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" id="contact">
+      <div class="container">
+        <h2 class="section-headline fade-up">Let's chat.</h2>
+        <p class="final-cta-sub fade-up">Ready for a free consultation call? Let's identify your goals, explore your workflows, and discover if this is a good fit.</p>
+        <div class="fade-up">
+          <a href="#contact" class="btn-primary">Book Your Free Call</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">&copy; 2026 Aydan Automates</p>
+        <ul class="footer-links">
+          <li><a href="#" aria-label="Twitter / X">X</a></li>
+          <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+          <li><a href="#" aria-label="YouTube">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================
+       JAVASCRIPT
+       ======================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ===== INTERACTIVE PARTICLE NETWORK (Hero) =====
+      (function initParticles() {
+        var canvas = document.getElementById('hero-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var mouse = { x: -1000, y: -1000 };
+        var particleCount = 80;
+        var connectDistance = 150;
+        var mouseRadius = 160;
+        var animId;
+
+        function resize() {
+          canvas.width = canvas.offsetWidth;
+          canvas.height = canvas.offsetHeight;
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Track mouse position relative to canvas
+        var heroSection = canvas.parentElement;
+        heroSection.style.pointerEvents = 'auto';
+        heroSection.addEventListener('mousemove', function (e) {
+          var rect = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+
+        heroSection.addEventListener('mouseleave', function () {
+          mouse.x = -1000;
+          mouse.y = -1000;
+        });
+
+        function Particle() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.radius = Math.random() * 1.5 + 0.5;
+          this.baseAlpha = Math.random() * 0.3 + 0.1;
+        }
+
+        for (var i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+
+            // Mouse repulsion
+            var dx = p.x - mouse.x;
+            var dy = p.y - mouse.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < mouseRadius) {
+              var force = (mouseRadius - dist) / mouseRadius;
+              var angle = Math.atan2(dy, dx);
+              p.vx += Math.cos(angle) * force * 0.15;
+              p.vy += Math.sin(angle) * force * 0.15;
+            }
+
+            // Damping
+            p.vx *= 0.98;
+            p.vy *= 0.98;
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Wrap edges
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+
+            // Draw particle
+            var alpha = p.baseAlpha;
+            if (dist < mouseRadius) {
+              alpha = p.baseAlpha + (1 - dist / mouseRadius) * 0.4;
+            }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(245, 245, 245, ' + alpha + ')';
+            ctx.fill();
+
+            // Draw connections
+            for (var j = i + 1; j < particles.length; j++) {
+              var p2 = particles[j];
+              var cdx = p.x - p2.x;
+              var cdy = p.y - p2.y;
+              var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+              if (cdist < connectDistance) {
+                var lineAlpha = (1 - cdist / connectDistance) * 0.12;
+
+                // Brighten lines near mouse
+                var midX = (p.x + p2.x) / 2;
+                var midY = (p.y + p2.y) / 2;
+                var mouseDist = Math.sqrt((midX - mouse.x) * (midX - mouse.x) + (midY - mouse.y) * (midY - mouse.y));
+                if (mouseDist < mouseRadius) {
+                  lineAlpha += (1 - mouseDist / mouseRadius) * 0.15;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = 'rgba(245, 245, 245, ' + lineAlpha + ')';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+
+          animId = requestAnimationFrame(animate);
+        }
+
+        if (!prefersReducedMotion) {
+          animate();
+        } else {
+          // Draw static particles for reduced motion
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(245, 245, 245, ' + p.baseAlpha + ')';
+            ctx.fill();
+          }
+        }
+
+        // Pause when hero not visible
+        var heroObs = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            if (!animId && !prefersReducedMotion) animate();
+          } else {
+            if (animId) { cancelAnimationFrame(animId); animId = null; }
+          }
+        }, { threshold: 0 });
+        heroObs.observe(heroSection);
+      })();
+
+      // ===== TEXT SCRAMBLE EFFECT =====
+      var scrambleChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`01';
+      var scrambleDuration = 600;
+
+      function preScramble(text) {
+        var result = '';
+        for (var i = 0; i < text.length; i++) {
+          result += text[i] === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        }
+        return result;
+      }
+
+      function scrambleText(el, finalText, customDuration) {
+        var dur = customDuration || scrambleDuration;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / dur, 1);
+
+          var result = '';
+          for (var i = 0; i < finalText.length; i++) {
+            if (finalText[i] === ' ') {
+              result += ' ';
+            } else if (i < finalText.length * progress) {
+              result += finalText[i];
+            } else {
+              result += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+            }
+          }
+
+          el.textContent = result;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = finalText;
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      // Hero scramble — synced to the CSS fadeUp animation-delay (0.4s)
+      if (!prefersReducedMotion) {
+        var heroScrambleEl = document.querySelector('.scramble-text');
+        if (heroScrambleEl) {
+          var heroFinalText = heroScrambleEl.textContent;
+          heroScrambleEl.textContent = preScramble(heroFinalText);
+          setTimeout(function () {
+            scrambleText(heroScrambleEl, heroFinalText);
+          }, 400);
+        }
+      }
+
+      // ===== NAVIGATION SCROLL EFFECT =====
+      var nav = document.querySelector('.nav');
+
+      function onScroll() {
+        if (window.scrollY > 40) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // ===== MOBILE MENU =====
+      var hamburger = document.querySelector('.nav-hamburger');
+      var mobileMenu = document.querySelector('.nav-mobile');
+      var mobileLinks = mobileMenu.querySelectorAll('a');
+
+      function toggleMenu() {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      function closeMenu() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          closeMenu();
+          hamburger.focus();
+        }
+      });
+
+      // ===== SCROLL-TRIGGERED ANIMATIONS =====
+      if (!prefersReducedMotion) {
+        var sections = document.querySelectorAll('.context, .services, .testimonials, .about, .final-cta');
+
+        var sectionObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var fadeEls = entry.target.querySelectorAll('.fade-up');
+              fadeEls.forEach(function (el, index) {
+                el.style.transitionDelay = (index * 0.12) + 's';
+
+                // Pre-scramble headlines so real text never flashes
+                if (el.classList.contains('section-headline')) {
+                  var finalText = el.textContent;
+                  el.textContent = preScramble(finalText);
+                  el.classList.add('visible');
+                  setTimeout(function () {
+                    scrambleText(el, finalText);
+                  }, index * 120);
+                } else {
+                  el.classList.add('visible');
+                }
+              });
+              sectionObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -60px 0px'
+        });
+
+        sections.forEach(function (section) {
+          sectionObserver.observe(section);
+        });
+      } else {
+        document.querySelectorAll('.fade-up').forEach(function (el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // ===== ABOUT PHOTO TOUCH SUPPORT =====
+      var aboutPhoto = document.querySelector('.about-photo');
+      if (aboutPhoto) {
+        aboutPhoto.addEventListener('click', function () {
+          aboutPhoto.classList.toggle('tapped');
+        });
+      }
+
+    })();
+  </script>
+</body>
+</html>
