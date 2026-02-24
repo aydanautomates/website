@@ -669,7 +669,7 @@
     .testimonials-track {
       display: flex;
       gap: 24px;
-      animation: scrollCarousel 40s linear infinite;
+      animation: scrollCarousel 80s linear infinite;
       width: max-content;
     }
 
@@ -1857,6 +1857,17 @@
       if (aboutPhoto) {
         aboutPhoto.addEventListener('click', function () {
           aboutPhoto.classList.toggle('tapped');
+        });
+      }
+
+      // ===== CAROUSEL TOUCH PAUSE =====
+      var carouselTrack = document.querySelector('.testimonials-track');
+      if (carouselTrack) {
+        carouselTrack.addEventListener('touchstart', function () {
+          carouselTrack.style.animationPlayState = 'paused';
+        }, { passive: true });
+        carouselTrack.addEventListener('touchend', function () {
+          carouselTrack.style.animationPlayState = 'running';
         });
       }
 
