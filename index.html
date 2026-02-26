@@ -1560,7 +1560,7 @@
         var mouse = { x: -1000, y: -1000 };
         var particleCount = 80;
         var connectDistance = 150;
-        var mouseRadius = 160;
+        var mouseRadius = 200;
         var animId;
 
         function resize() {
@@ -1612,8 +1612,8 @@
             if (dist < mouseRadius) {
               var force = (mouseRadius - dist) / mouseRadius;
               var angle = Math.atan2(dy, dx);
-              p.vx += Math.cos(angle) * force * 0.15;
-              p.vy += Math.sin(angle) * force * 0.15;
+              p.vx += Math.cos(angle) * force * 0.19;
+              p.vy += Math.sin(angle) * force * 0.19;
             }
 
             // Damping
