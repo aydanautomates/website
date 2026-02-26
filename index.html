@@ -1590,8 +1590,8 @@
           this.y = Math.random() * canvas.height;
           this.vx = (Math.random() - 0.5) * 0.5;
           this.vy = (Math.random() - 0.5) * 0.5;
-          this.driftVx = (Math.random() - 0.5) * 1.0;
-          this.driftVy = (Math.random() - 0.5) * 1.0;
+          this.driftVx = (Math.random() - 0.5) * 0.5;
+          this.driftVy = (Math.random() - 0.5) * 0.5;
           this.radius = Math.random() * 1.5 + 0.5;
           this.baseAlpha = Math.random() * 0.3 + 0.1;
         }
@@ -1615,8 +1615,8 @@
               var force = (mouseRadius - dist) / mouseRadius;
               force = Math.pow(force, 1.5);
               var angle = Math.atan2(dy, dx);
-              p.vx += Math.cos(angle) * force * 0.6;
-              p.vy += Math.sin(angle) * force * 0.6;
+              p.vx += Math.cos(angle) * force * 0.4;
+              p.vy += Math.sin(angle) * force * 0.4;
             }
 
             // Ambient drift
