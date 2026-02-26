@@ -65,7 +65,7 @@ Website/
 ## Key Features
 - **Scramble text effect:** `scrambleText()` function using requestAnimationFrame. Hero synced to CSS fadeUp animation (400ms delay). Section headlines triggered by IntersectionObserver on scroll.
 - **Staggered scroll animations:** Section-based IntersectionObserver applies incremental `transition-delay` (index × 0.12s) to `.fade-up` children.
-- **Testimonial carousel:** CSS `scrollCarousel` animation (80s duration, linear, infinite). Pauses on hover (desktop) and touch (mobile via JS touchstart/touchend). Cards are duplicated in HTML for seamless loop.
+- **Testimonial carousel:** CSS `scrollCarousel` animation (130s desktop, 80s mobile). Pauses on hover (desktop) and touch (mobile via JS). Edge fades via CSS `mask-image`. Cards duplicated in HTML for seamless infinite loop.
 - **Contact form:** Posts JSON to `/api/contact`, shows inline success/error. Honeypot spam protection + IP rate limiting (3/hr). Server-side email validation.
 - **About photo:** Grayscale by default, transitions to color on hover (desktop) or touch (mobile).
 
