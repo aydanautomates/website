@@ -654,14 +654,16 @@
       display: flex;
       gap: 24px;
       width: max-content;
+      animation: scrollCarousel 130s linear infinite;
     }
 
-    .testimonials-carousel {
-      cursor: grab;
+    .testimonials-carousel:hover .testimonials-track {
+      animation-play-state: paused;
     }
 
-    .testimonials-carousel.dragging {
-      cursor: grabbing;
+    @keyframes scrollCarousel {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .testimonial-card {
@@ -1087,6 +1089,10 @@
       .testimonial-card {
         min-width: 300px;
         max-width: 300px;
+      }
+
+      .testimonials-track {
+        animation-duration: 80s;
       }
 
       .testimonials-carousel {
@@ -1850,89 +1856,14 @@
         });
       }
 
-      // ===== TESTIMONIAL CAROUSEL =====
-      var carousel = document.querySelector('.testimonials-carousel');
+      // ===== CAROUSEL TOUCH PAUSE =====
       var carouselTrack = document.querySelector('.testimonials-track');
-      if (carousel && carouselTrack) {
-        var isAutoScrolling = true;
-        var isDragging = false;
-        var dragStartX = 0;
-        var dragScrollLeft = 0;
-
-        function getResetPoint() {
-          return carouselTrack.scrollWidth / 2;
-        }
-
-        // Full loop duration in seconds: desktop 130s, mobile 80s
-        var duration = window.innerWidth >= 768 ? 130 : 80;
-        var scrollSpeed = getResetPoint() / (duration * 60);
-        var subPixel = 0;
-
-        function tick() {
-          if (isAutoScrolling && !isDragging) {
-            subPixel += scrollSpeed;
-            if (subPixel >= 1) {
-              var px = Math.floor(subPixel);
-              carousel.scrollLeft += px;
-              subPixel -= px;
-            }
-            if (carousel.scrollLeft >= getResetPoint()) {
-              carousel.scrollLeft -= getResetPoint();
-            }
-          }
-          requestAnimationFrame(tick);
-        }
-
-        requestAnimationFrame(tick);
-
-        // Desktop: pause on hover
-        carousel.addEventListener('mouseenter', function () {
-          if (!isDragging) isAutoScrolling = false;
-        });
-        carousel.addEventListener('mouseleave', function () {
-          if (!isDragging) isAutoScrolling = true;
-        });
-
-        // Desktop: drag to scroll
-        carousel.addEventListener('mousedown', function (e) {
-          isDragging = true;
-          isAutoScrolling = false;
-          dragStartX = e.pageX;
-          dragScrollLeft = carousel.scrollLeft;
-          carousel.classList.add('dragging');
-          e.preventDefault();
-        });
-
-        document.addEventListener('mousemove', function (e) {
-          if (!isDragging) return;
-          var dx = e.pageX - dragStartX;
-          carousel.scrollLeft = dragScrollLeft - dx;
-        });
-
-        document.addEventListener('mouseup', function () {
-          if (!isDragging) return;
-          isDragging = false;
-          isAutoScrolling = true;
-          carousel.classList.remove('dragging');
-        });
-
-        // Mobile: touch to scroll
-        carousel.addEventListener('touchstart', function (e) {
-          isDragging = true;
-          isAutoScrolling = false;
-          dragStartX = e.touches[0].pageX;
-          dragScrollLeft = carousel.scrollLeft;
+      if (carouselTrack) {
+        carouselTrack.addEventListener('touchstart', function () {
+          carouselTrack.style.animationPlayState = 'paused';
         }, { passive: true });
-
-        carousel.addEventListener('touchmove', function (e) {
-          if (!isDragging) return;
-          var dx = e.touches[0].pageX - dragStartX;
-          carousel.scrollLeft = dragScrollLeft - dx;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', function () {
-          isDragging = false;
-          isAutoScrolling = true;
+        carouselTrack.addEventListener('touchend', function () {
+          carouselTrack.style.animationPlayState = 'running';
         });
       }
 
