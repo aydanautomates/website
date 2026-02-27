@@ -655,6 +655,7 @@
       gap: 24px;
       width: max-content;
       animation: scrollCarousel 130s linear infinite;
+      animation-play-state: paused;
       will-change: transform;
     }
 
@@ -1304,7 +1305,20 @@
             </div>
           </div>
 
-          <!-- Card 2: Marlene -->
+          <!-- Card 2: Patrick -->
+          <div class="testimonial-card">
+            <blockquote>Aydan changed the entire game for our content team. After one consultation session, he was able to build an AI-driven content workflow that compressed our original system from an 8 hour process to 1 hour without compromising on quality. Now we have the bandwidth to close more deals and serve more clients.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><img src="Testimonials/Patrick.png" alt="Patrick Keenan" loading="lazy"></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/patrickrkeenan/" target="_blank" rel="noopener noreferrer">Patrick Keenan</a></p>
+                <p class="testimonial-role">CEO & Founder</p>
+                <p class="testimonial-company">Chuma</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Marlene -->
           <div class="testimonial-card">
             <blockquote>At the last company I worked for, there was a night and day difference when Aydan started working with the marketing team. His AI systems drove 75% of our content output and allowed us to launch industry-leading campaigns on a consistent basis. He knows what tools to use and how to use them.</blockquote>
             <div class="testimonial-author">
@@ -1317,7 +1331,7 @@
             </div>
           </div>
 
-          <!-- Card 3: Alexander -->
+          <!-- Card 4: Alexander -->
           <div class="testimonial-card">
             <blockquote>Aydan really knows his stuff. If he's not your go-to AI guy, you're missing out.</blockquote>
             <div class="testimonial-author">
@@ -1404,6 +1418,18 @@
               <div class="testimonial-author-info">
                 <p class="testimonial-name"><a href="https://www.linkedin.com/in/calebcart/" target="_blank" rel="noopener noreferrer">Caleb Carter</a></p>
                 <p class="testimonial-role">Data Analyst</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <blockquote>Aydan changed the entire game for our content team. After one consultation session, he was able to build an AI-driven content workflow that compressed our original system from an 8 hour process to 1 hour without compromising on quality. Now we have the bandwidth to close more deals and serve more clients.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-pfp"><img src="Testimonials/Patrick.png" alt="Patrick Keenan" loading="lazy"></div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name"><a href="https://www.linkedin.com/in/patrickrkeenan/" target="_blank" rel="noopener noreferrer">Patrick Keenan</a></p>
+                <p class="testimonial-role">CEO & Founder</p>
+                <p class="testimonial-company">Chuma</p>
               </div>
             </div>
           </div>
@@ -1881,9 +1907,19 @@
         });
       }
 
-      // ===== CAROUSEL TOUCH PAUSE =====
+      // ===== CAROUSEL START ON SCROLL =====
       var carouselTrack = document.querySelector('.testimonials-track');
-      if (carouselTrack) {
+      var carouselSection = document.querySelector('.testimonials-carousel');
+      if (carouselTrack && carouselSection) {
+        var carouselObserver = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            carouselTrack.style.animationPlayState = 'running';
+            carouselObserver.disconnect();
+          }
+        }, { threshold: 0.1 });
+        carouselObserver.observe(carouselSection);
+
+        // Touch pause on mobile
         carouselTrack.addEventListener('touchstart', function () {
           carouselTrack.style.animationPlayState = 'paused';
         }, { passive: true });
