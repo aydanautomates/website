@@ -654,16 +654,15 @@
       display: flex;
       gap: 24px;
       width: max-content;
-      animation: scrollCarousel 145s linear infinite;
-      animation-play-state: paused;
+      animation: scrollCarousel 145s linear infinite paused;
       will-change: transform;
     }
 
-    .testimonials-track.carousel-running {
+    .testimonials-track.is-scrolling {
       animation-play-state: running;
     }
 
-    .testimonials-carousel:hover .testimonials-track.carousel-running {
+    .testimonials-carousel:hover .testimonials-track.is-scrolling {
       animation-play-state: paused;
     }
 
@@ -1911,24 +1910,25 @@
         });
       }
 
-      // ===== CAROUSEL START ON SCROLL =====
+      // ===== CAROUSEL =====
+      // Starts paused via CSS. IntersectionObserver adds .is-scrolling when visible.
+      // Desktop hover pause handled purely in CSS.
+      // Mobile touch pause toggles .is-scrolling via JS.
       var carouselTrack = document.querySelector('.testimonials-track');
       var carouselSection = document.querySelector('.testimonials-carousel');
       if (carouselTrack && carouselSection) {
-        var carouselObserver = new IntersectionObserver(function (entries) {
+        new IntersectionObserver(function (entries, obs) {
           if (entries[0].isIntersecting) {
-            carouselTrack.classList.add('carousel-running');
-            carouselObserver.disconnect();
+            carouselTrack.classList.add('is-scrolling');
+            obs.disconnect();
           }
-        }, { threshold: 0.1 });
-        carouselObserver.observe(carouselSection);
+        }, { threshold: 0.1 }).observe(carouselSection);
 
-        // Touch pause on mobile
-        carouselTrack.addEventListener('touchstart', function () {
-          carouselTrack.classList.remove('carousel-running');
+        carouselSection.addEventListener('touchstart', function () {
+          carouselTrack.style.animationPlayState = 'paused';
         }, { passive: true });
-        carouselTrack.addEventListener('touchend', function () {
-          carouselTrack.classList.add('carousel-running');
+        carouselSection.addEventListener('touchend', function () {
+          carouselTrack.style.removeProperty('animation-play-state');
         });
       }
 
