@@ -654,12 +654,16 @@
       display: flex;
       gap: 24px;
       width: max-content;
-      animation: scrollCarousel 130s linear infinite;
+      animation: scrollCarousel 145s linear infinite;
       animation-play-state: paused;
       will-change: transform;
     }
 
-    .testimonials-carousel:hover .testimonials-track {
+    .testimonials-track.carousel-running {
+      animation-play-state: running;
+    }
+
+    .testimonials-carousel:hover .testimonials-track.carousel-running {
       animation-play-state: paused;
     }
 
@@ -1091,7 +1095,7 @@
       }
 
       .testimonials-track {
-        animation-duration: 100s;
+        animation-duration: 112s;
       }
 
       .testimonials-carousel {
@@ -1913,7 +1917,7 @@
       if (carouselTrack && carouselSection) {
         var carouselObserver = new IntersectionObserver(function (entries) {
           if (entries[0].isIntersecting) {
-            carouselTrack.style.animationPlayState = 'running';
+            carouselTrack.classList.add('carousel-running');
             carouselObserver.disconnect();
           }
         }, { threshold: 0.1 });
@@ -1921,10 +1925,10 @@
 
         // Touch pause on mobile
         carouselTrack.addEventListener('touchstart', function () {
-          carouselTrack.style.animationPlayState = 'paused';
+          carouselTrack.classList.remove('carousel-running');
         }, { passive: true });
         carouselTrack.addEventListener('touchend', function () {
-          carouselTrack.style.animationPlayState = 'running';
+          carouselTrack.classList.add('carousel-running');
         });
       }
 
