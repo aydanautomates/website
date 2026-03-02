@@ -1924,12 +1924,15 @@
           }
         }, { threshold: 0.1 }).observe(carouselSection);
 
-        carouselSection.addEventListener('touchstart', function () {
+        function pauseCarousel() {
           carouselTrack.style.animationPlayState = 'paused';
-        }, { passive: true });
-        carouselSection.addEventListener('touchend', function () {
+        }
+        function resumeCarousel() {
           carouselTrack.style.removeProperty('animation-play-state');
-        });
+        }
+        carouselSection.addEventListener('touchstart', pauseCarousel, { passive: true });
+        carouselSection.addEventListener('touchend', resumeCarousel);
+        carouselSection.addEventListener('touchcancel', resumeCarousel);
       }
 
       // ===== CONTACT FORM SUBMISSION =====
