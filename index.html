@@ -415,6 +415,7 @@
 
     .nav-mobile .btn-primary {
       margin-top: 16px;
+      color: var(--bg);
     }
 
     /* ========================================
@@ -1093,7 +1094,7 @@
       }
 
       .testimonials-track {
-        animation-duration: 112s;
+        animation: scrollCarousel 112s linear infinite paused;
       }
 
       .testimonials-carousel {
@@ -1923,15 +1924,64 @@
           }
         }, { threshold: 0.1 }).observe(carouselSection);
 
-        function pauseCarousel() {
-          carouselTrack.style.animationPlayState = 'paused';
+        // Mobile: stop animation on first touch, enable manual scrubbing
+        if ('ontouchstart' in window) {
+          var animationStopped = false;
+          var isDragging = false;
+          var startX, currentX, startTranslate;
+          var lastMoveTime, lastMoveX, velocity;
+
+          function getCurrentTranslateX() {
+            var matrix = new DOMMatrix(window.getComputedStyle(carouselTrack).transform);
+            return matrix.m41;
+          }
+
+          carouselSection.addEventListener('touchstart', function (e) {
+            if (!animationStopped) {
+              currentX = getCurrentTranslateX();
+              carouselTrack.style.animation = 'none';
+              carouselTrack.classList.remove('is-scrolling');
+              carouselTrack.style.transform = 'translateX(' + currentX + 'px)';
+              animationStopped = true;
+            } else {
+              currentX = getCurrentTranslateX();
+            }
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startTranslate = currentX;
+            lastMoveTime = Date.now();
+            lastMoveX = startX;
+            velocity = 0;
+            carouselTrack.style.transition = 'none';
+          }, { passive: true });
+
+          carouselSection.addEventListener('touchmove', function (e) {
+            if (!isDragging) return;
+            var touchX = e.touches[0].clientX;
+            var now = Date.now();
+            var dt = now - lastMoveTime;
+            if (dt > 0) velocity = (touchX - lastMoveX) / dt;
+            lastMoveTime = now;
+            lastMoveX = touchX;
+            var maxScroll = -(carouselTrack.scrollWidth / 2);
+            currentX = Math.max(maxScroll, Math.min(0, startTranslate + touchX - startX));
+            carouselTrack.style.transform = 'translateX(' + currentX + 'px)';
+          }, { passive: true });
+
+          carouselSection.addEventListener('touchend', function () {
+            if (!isDragging) return;
+            isDragging = false;
+            var momentum = velocity * 150;
+            var maxScroll = -(carouselTrack.scrollWidth / 2);
+            currentX = Math.max(maxScroll, Math.min(0, currentX + momentum));
+            carouselTrack.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            carouselTrack.style.transform = 'translateX(' + currentX + 'px)';
+          });
+
+          carouselSection.addEventListener('touchcancel', function () {
+            isDragging = false;
+          });
         }
-        function resumeCarousel() {
-          carouselTrack.style.removeProperty('animation-play-state');
-        }
-        carouselSection.addEventListener('touchstart', pauseCarousel, { passive: true });
-        carouselSection.addEventListener('touchend', resumeCarousel);
-        carouselSection.addEventListener('touchcancel', resumeCarousel);
       }
 
       // ===== CONTACT FORM SUBMISSION =====
