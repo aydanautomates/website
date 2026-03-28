@@ -91,8 +91,12 @@ Website/
 - **X:** https://x.com/aydantheaiguy
 - **LinkedIn:** https://www.linkedin.com/in/aydan-arroyo/
 
+## Case Sensitivity (Critical)
+Vercel runs Linux (case-sensitive). Folder names in the repo must exactly match the URL paths.
+- `freebies/` MUST be lowercase. URLs use `/freebies/`. Git tracks files under `freebies/`. Never create or reference `Freebies/` with a capital F.
+- `Testimonials/` uses capital T. HTML refs must match exactly.
+
 ## Important Notes
-- `Testimonials/` folder uses capital T — Vercel runs Linux (case-sensitive). HTML refs must match exactly.
 - Jesus Colon testimonial uses "JC" initials (no headshot image).
 - The `.gitignore` excludes `.vercel/`, `node_modules/`, and `.DS_Store`.
 - `aydan-automates-landing-page-brief.md` is the original design brief (not deployed, for reference only).
