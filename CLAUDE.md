@@ -5,7 +5,7 @@ Landing page for Aydan Automates, an AI automation consulting business. Single-p
 
 ## Tech Stack
 - **Frontend:** Single `index.html` with inline CSS + JS (no frameworks)
-- **Fonts:** Google Fonts — PT Mono (headings/labels/CTAs) + PT Sans (body copy)
+- **Fonts:** Google Fonts — PT Mono (headings/labels/CTAs) + DM Sans (body copy)
 - **Hosting:** Vercel (project: `aydan-automates`)
 - **Domain:** aydanautomates.com (registered on Namecheap)
 - **Email:** ForwardEmail (operator@aydanautomates.com, aydan@aydanautomates.com)
@@ -47,14 +47,13 @@ Website/
 --text-muted: #888888  /* Muted text */
 --text-dim: #767676    /* Dim text (WCAG AA compliant) */
 --font-mono: 'PT Mono', monospace
---font-sans: 'PT Sans', sans-serif
+--font-sans: 'DM Sans', sans-serif
 ```
-- Gold accent: `#D4A843` (used sparingly)
 - Mobile breakpoints: 767px and 420px
 
 ## Page Sections (in order)
 1. **Nav** — Logo + "Book a Call" button (scrolls to contact form)
-2. **Hero** — Headline with scramble/glitch text effect, sub-copy, two CTAs
+2. **Hero** — Headline with scramble/glitch text effect, sub-copy, CTA, bouncing scroll arrow. Full-viewport height on mobile (`100dvh`).
 3. **Context** ("Let's be real.") — Intro copy about AI challenges
 4. **Services** — 4 service cards (Coaching, Consulting, Custom Systems, Ongoing Support)
 5. **Testimonials** — Horizontal scrolling carousel with headshots
@@ -68,6 +67,7 @@ Website/
 - **Testimonial carousel:** CSS `scrollCarousel` animation (130s desktop, 80s mobile). Pauses on hover (desktop) and touch (mobile via JS). Edge fades via CSS `mask-image`. Cards duplicated in HTML for seamless infinite loop.
 - **Contact form:** Posts JSON to `/api/contact`, shows inline success/error. Honeypot spam protection + IP rate limiting (3/hr). Server-side email validation.
 - **About photo:** Grayscale by default, transitions to color on hover (desktop) or touch (mobile).
+- **Hero scroll arrow:** SVG chevron at bottom of hero with `bounceArrow` CSS animation (2s ease-in-out infinite). Fades in at 1.2s delay to follow hero content stagger sequence.
 
 ## Deployment
 - **GitHub repo:** github.com/aydanautomates/website (main branch)

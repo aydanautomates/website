@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure OpenClaw VPS Setup Prompt | Aydan Automates</title>
+<meta name="description" content="A free Claude Code prompt that walks you through setting up OpenClaw on a VPS with full security. 10 phases, fully interactive.">
+<link rel="canonical" href="https://aydanautomates.com/freebies/openclaw-secure-setup/">
+<meta property="og:title" content="Secure OpenClaw VPS Setup Prompt | Aydan Automates">
+<meta property="og:description" content="A free Claude Code prompt that walks you through setting up OpenClaw on a VPS with full security. 10 phases, fully interactive.">
+<meta property="og:url" content="https://aydanautomates.com/freebies/openclaw-secure-setup/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aydan Automates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Secure OpenClaw VPS Setup Prompt | Aydan Automates">
+<meta name="twitter:description" content="A free Claude Code prompt that walks you through setting up OpenClaw on a VPS with full security. 10 phases, fully interactive.">
+<link rel="icon" type="image/svg+xml" href="/Favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/Favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #CCCCCC;
+    background: #0A0A0A;
+  }
+
+  /* ===== GATE SECTION ===== */
+  #gate {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 24px;
+  }
+
+  .gate-inner {
+    max-width: 680px;
+    width: 100%;
+  }
+
+  .gate-logo {
+    width: 220px;
+    margin-bottom: 48px;
+  }
+
+  .gate-title {
+    font-family: 'PT Mono', monospace;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #F5F5F5;
+    margin-bottom: 20px;
+  }
+
+  .gate-title .accent { color: #F5F5F5; }
+
+  .gate-subtitle {
+    font-size: 18px;
+    color: #AAAAAA;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 540px;
+  }
+
+  .gate-preview {
+    border: 1px solid #2A2A2A;
+    background: #1A1A1A;
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+
+  .gate-preview-label {
+    font-family: 'PT Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #F5F5F5;
+    margin-bottom: 16px;
+  }
+
+  .gate-preview p {
+    margin-bottom: 12px;
+    color: #AAAAAA;
+    font-size: 15px;
+  }
+
+  .gate-preview p:last-child { margin-bottom: 0; }
+
+  .gate-preview strong { color: #F5F5F5; }
+
+  .gate-preview ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gate-preview ul li {
+    color: #AAAAAA;
+    font-size: 15px;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .gate-preview ul li:last-child { margin-bottom: 0; }
+
+  .gate-preview ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: #F5F5F5;
+  }
+
+  .gate-divider {
+    width: 60px;
+    height: 1px;
+    background: #2A2A2A;
+    margin: 40px 0;
+  }
+
+  /* Kit form overrides */
+  .kit-form-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .kit-form-wrapper .formkit-form {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .kit-form-wrapper .formkit-form [data-style="minimal"] {
+    padding: 0 !important;
+  }
+
+  .kit-form-wrapper .formkit-background {
+    display: none !important;
+  }
+
+  .kit-form-wrapper .formkit-header {
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  .kit-form-wrapper .formkit-header h2 {
+    font-family: 'PT Mono', monospace !important;
+    font-size: 28px !important;
+    font-weight: 400 !important;
+    color: #F5F5F5 !important;
+  }
+
+  .kit-form-wrapper .formkit-subheader {
+    text-align: center !important;
+    margin-bottom: 24px !important;
+  }
+
+  .kit-form-wrapper .formkit-subheader p {
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    color: #AAAAAA !important;
+  }
+
+  .kit-form-wrapper .formkit-fields {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .kit-form-wrapper .formkit-field {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .kit-form-wrapper .formkit-input {
+    background: #1A1A1A !important;
+    border: 1px solid #2A2A2A !important;
+    border-radius: 0 !important;
+    color: #F5F5F5 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+    padding: 16px 18px !important;
+    width: 100% !important;
+    height: auto !important;
+    line-height: 1.4 !important;
+    transition: border-color 0.2s ease !important;
+  }
+
+  .kit-form-wrapper .formkit-input:focus {
+    border-color: #F5F5F5 !important;
+    outline: none !important;
+  }
+
+  .kit-form-wrapper .formkit-input::placeholder {
+    color: #666666 !important;
+    opacity: 1 !important;
+  }
+
+  .kit-form-wrapper .formkit-submit {
+    background-color: #F5F5F5 !important;
+    border-radius: 0 !important;
+    font-family: 'PT Mono', monospace !important;
+    font-size: 14px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #0A0A0A !important;
+    width: 100% !important;
+    margin-top: 4px !important;
+    min-height: 56px !important;
+    overflow: visible !important;
+  }
+
+  .kit-form-wrapper .formkit-submit > span {
+    padding: 18px 24px !important;
+    display: block !important;
+    line-height: 1.4 !important;
+  }
+
+  .kit-form-wrapper .formkit-submit:hover > span {
+    background-color: rgba(0,0,0,0.08) !important;
+  }
+
+  .kit-form-wrapper .formkit-guarantee {
+    color: #767676 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    margin-top: 12px !important;
+  }
+
+  .kit-form-wrapper .formkit-powered-by-convertkit-container {
+    display: none !important;
+  }
+
+  .kit-form-wrapper .formkit-alert-success {
+    background: #1A1A1A !important;
+    border-color: #F5F5F5 !important;
+    color: #F5F5F5 !important;
+    border-radius: 0 !important;
+  }
+
+  .form-cta {
+    font-family: 'PT Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    color: #F5F5F5;
+    margin-bottom: 20px;
+  }
+
+  /* ===== GUIDE SECTION ===== */
+  #guide {
+    display: none;
+    padding: 60px 24px 80px;
+  }
+
+  #guide.visible {
+    display: block;
+  }
+
+  .guide-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .guide-logo {
+    width: 180px;
+    margin-bottom: 48px;
+  }
+
+  .guide-header {
+    margin-bottom: 48px;
+  }
+
+  .guide-header h1 {
+    font-family: 'PT Mono', monospace;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #F5F5F5;
+    margin-bottom: 16px;
+  }
+
+  .guide-header h1 .accent { color: #F5F5F5; }
+
+  .guide-intro {
+    font-size: 17px;
+    color: #CCCCCC;
+    line-height: 1.75;
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  /* Day blocks */
+  .day-block {
+    border: 1px solid #2A2A2A;
+    background: #1A1A1A;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+
+  .section-label {
+    font-family: 'PT Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 8px;
+  }
+
+  .day-block h2 {
+    font-family: 'PT Mono', monospace;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 400;
+    color: #F5F5F5;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .day-block h2 .accent { color: #F5F5F5; }
+
+  .time-est {
+    font-family: 'PT Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #767676;
+    margin-bottom: 20px;
+  }
+
+  .why {
+    font-style: italic;
+    color: #AAAAAA;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .day-block p {
+    margin-bottom: 14px;
+  }
+
+  .day-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  strong { color: #F5F5F5; font-weight: 500; }
+
+  .day-block ol, .day-block ul {
+    margin: 12px 0;
+    padding-left: 24px;
+  }
+
+  .day-block li {
+    margin-bottom: 8px;
+  }
+
+  .day-block li:last-child {
+    margin-bottom: 0;
+  }
+
+  a { color: #F5F5F5; text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: #CCCCCC; }
+
+  .prompt-box-wrapper {
+    position: relative;
+    margin: 16px 0;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'PT Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #F5F5F5;
+    color: #0A0A0A;
+    border: 1px solid #F5F5F5;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    z-index: 2;
+  }
+
+  .copy-btn:hover {
+    background: transparent;
+    color: #F5F5F5;
+  }
+
+  .prompt-box {
+    background: #111111;
+    border: 1px solid #2A2A2A;
+    padding: 16px 20px;
+    padding-top: 52px;
+    font-family: 'PT Mono', monospace;
+    font-size: 12px;
+    color: #AAAAAA;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .prompt-box .prompt-heading {
+    color: #F5F5F5;
+    font-size: 13px;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .prompt-box .prompt-subheading {
+    color: #CCCCCC;
+    font-size: 12px;
+    font-weight: 400;
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .prompt-box code {
+    background: #0A0A0A;
+    border: 1px solid #2A2A2A;
+    padding: 1px 5px;
+    font-family: 'PT Mono', monospace;
+    font-size: 11px;
+    color: #CCCCCC;
+  }
+
+  .prompt-label {
+    font-family: 'PT Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #F5F5F5;
+    margin-bottom: 8px;
+  }
+
+  /* Outro */
+  .outro {
+    border-top: 1px solid #2A2A2A;
+    padding-top: 32px;
+    margin-top: 40px;
+  }
+
+  .outro p, .outro li {
+    color: #AAAAAA;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .outro ul {
+    padding-left: 24px;
+    margin-top: 8px;
+  }
+
+  .social-handle {
+    font-family: 'PT Mono', monospace;
+    color: #F5F5F5;
+    font-size: 15px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .day-block { padding: 24px 20px; }
+    .gate-preview { padding: 24px 20px; }
+    .gate-logo { width: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== EMAIL GATE ===== -->
+<section id="gate">
+  <div class="gate-inner">
+    <a href="https://aydanautomates.com" aria-label="Aydan Automates homepage"><svg class="gate-logo" viewBox="0 0 897 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M98.2393 104.832C90.3019 111.312 80.1656 115.2 69.1201 115.2C51.3428 115.2 35.9195 105.132 28.2344 90.3877H89.8994L98.2393 104.832ZM85.7529 26.1357C102.982 32.8071 115.2 49.5358 115.2 69.1201C115.2 78.1282 112.612 86.5305 108.144 93.6299L77.4639 40.4912L85.7529 26.1357ZM69.1201 23.04C69.7975 23.04 70.4714 23.057 71.1416 23.0859L40.4727 76.209H23.583C23.2262 73.8982 23.04 71.5308 23.04 69.1201C23.04 43.6708 43.6708 23.04 69.1201 23.04ZM81.7139 76.209H56.8428L69.2783 54.6699L81.7139 76.209Z" fill="white"/>
+      <path d="M163.998 94.1201H154.154L172.077 43.211H183.462L201.409 94.1201H191.565L177.968 53.6514H177.57L163.998 94.1201ZM164.321 74.1592H191.168V81.5668H164.321V74.1592ZM202.239 43.211H212.655L225.109 65.7323H225.606L238.06 43.211H248.475L229.956 75.1286V94.1201H220.758V75.1286L202.239 43.211ZM275.058 94.1201H257.806V43.211H275.406C280.46 43.211 284.802 44.2302 288.431 46.2686C292.077 48.2903 294.878 51.1987 296.833 54.9937C298.789 58.7887 299.767 63.3294 299.767 68.6159C299.767 73.9189 298.781 78.4762 296.809 82.2877C294.853 86.0993 292.028 89.0242 288.332 91.0626C284.653 93.1009 280.228 94.1201 275.058 94.1201ZM267.029 86.1407H274.61C278.157 86.1407 281.115 85.4944 283.485 84.2018C285.855 82.8926 287.636 80.9454 288.829 78.3602C290.022 75.7584 290.619 72.5103 290.619 68.6159C290.619 64.7214 290.022 61.4899 288.829 58.9213C287.636 56.336 285.871 54.4054 283.534 53.1294C281.214 51.8367 278.331 51.1904 274.884 51.1904H267.029V86.1407ZM315.132 94.1201H305.289L323.211 43.211H334.596L352.544 94.1201H342.7L329.103 53.6514H328.705L315.132 94.1201ZM315.456 74.1592H342.302V81.5668H315.456V74.1592ZM403.885 43.211V94.1201H395.682L371.694 59.4433H371.271V94.1201H362.049V43.211H370.302L394.265 77.9127H394.712V43.211H403.885ZM443.435 94.1201H433.591L451.514 43.211H462.898L480.846 94.1201H471.002L457.405 53.6514H457.007L443.435 94.1201ZM443.758 74.1592H470.604V81.5668H443.758V74.1592ZM522.443 43.211H531.665V76.471C531.665 80.1168 530.804 83.3235 529.08 86.091C527.373 88.8585 524.97 91.0212 521.871 92.5789C518.772 94.1201 515.151 94.8907 511.008 94.8907C506.849 94.8907 503.22 94.1201 500.121 92.5789C497.022 91.0212 494.619 88.8585 492.912 86.091C491.205 83.3235 490.351 80.1168 490.351 76.471V43.211H499.574V75.7004C499.574 77.8216 500.038 79.7108 500.966 81.368C501.91 83.0252 503.236 84.3261 504.943 85.2707C506.65 86.1987 508.672 86.6627 511.008 86.6627C513.345 86.6627 515.367 86.1987 517.074 85.2707C518.797 84.3261 520.123 83.0252 521.051 81.368C521.979 79.7108 522.443 77.8216 522.443 75.7004V43.211ZM542.252 50.9419V43.211H582.87V50.9419H567.135V94.1201H557.987V50.9419H542.252ZM636.734 68.6656C636.734 74.1509 635.707 78.849 633.652 82.76C631.614 86.6544 628.83 89.6374 625.3 91.7089C621.787 93.7804 617.801 94.8161 613.343 94.8161C608.885 94.8161 604.891 93.7804 601.362 91.7089C597.848 89.6208 595.064 86.6296 593.009 82.7352C590.971 78.8242 589.952 74.1343 589.952 68.6656C589.952 63.1802 590.971 58.4904 593.009 54.596C595.064 50.685 597.848 47.6937 601.362 45.6222C604.891 43.5507 608.885 42.515 613.343 42.515C617.801 42.515 621.787 43.5507 625.3 45.6222C628.83 47.6937 631.614 50.685 633.652 54.596C635.707 58.4904 636.734 63.1802 636.734 68.6656ZM627.462 68.6656C627.462 64.8043 626.858 61.5479 625.648 58.8964C624.455 56.2283 622.797 54.2148 620.676 52.8559C618.555 51.4804 616.111 50.7927 613.343 50.7927C610.576 50.7927 608.131 51.4804 606.01 52.8559C603.889 54.2148 602.223 56.2283 601.014 58.8964C599.82 61.5479 599.224 64.8043 599.224 68.6656C599.224 72.5268 599.82 75.7915 601.014 78.4596C602.223 81.1111 603.889 83.1246 606.01 84.5001C608.131 85.859 610.576 86.5384 613.343 86.5384C616.111 86.5384 618.555 85.859 620.676 84.5001C622.797 83.1246 624.455 81.1111 625.648 78.4596C626.858 75.7915 627.462 72.5268 627.462 68.6656ZM648.253 43.211H659.539L674.652 80.1002H675.249L690.363 43.211H701.648V94.1201H692.799V59.145H692.326L678.257 93.971H671.645L657.575 59.0704H657.103V94.1201H648.253V43.211ZM721.028 94.1201H711.185L729.107 43.211H740.492L758.44 94.1201H748.596L734.999 53.6514H734.601L721.028 94.1201ZM721.352 74.1592H748.198V81.5668H721.352V74.1592ZM759.556 50.9419V43.211H800.173V50.9419H784.438V94.1201H775.291V50.9419H759.556ZM810.804 94.1201V43.211H843.915V50.9419H820.026V64.7629H842.199V72.4937H820.026V86.3893H844.113V94.1201H810.804ZM883.79 57.2061C883.558 55.0351 882.58 53.3448 880.857 52.135C879.15 50.9253 876.929 50.3204 874.195 50.3204C872.273 50.3204 870.624 50.6104 869.248 51.1904C867.873 51.7704 866.82 52.5576 866.091 53.5519C865.362 54.5463 864.989 55.6814 864.973 56.9575C864.973 58.0181 865.213 58.9378 865.694 59.7167C866.191 60.4956 866.862 61.1585 867.707 61.7053C868.552 62.2356 869.489 62.6831 870.516 63.0477C871.543 63.4123 872.579 63.7188 873.623 63.9674L878.396 65.1606C880.318 65.608 882.166 66.2129 883.939 66.9752C885.729 67.7375 887.328 68.6987 888.737 69.8588C890.162 71.0188 891.289 72.4191 892.118 74.0597C892.946 75.7004 893.36 77.6227 893.36 79.8268C893.36 82.8097 892.598 85.4364 891.074 87.7068C889.549 89.9606 887.345 91.7255 884.461 93.0015C881.594 94.261 878.123 94.8907 874.046 94.8907C870.085 94.8907 866.646 94.2776 863.73 93.0512C860.83 91.8249 858.559 90.0351 856.919 87.6819C855.295 85.3287 854.416 82.4617 854.284 79.0811H863.357C863.489 80.8543 864.036 82.3292 864.998 83.5058C865.959 84.6824 867.21 85.5607 868.751 86.1407C870.309 86.7207 872.049 87.0107 873.971 87.0107C875.976 87.0107 877.733 86.7124 879.241 86.1159C880.766 85.5027 881.959 84.6575 882.821 83.5803C883.682 82.4866 884.122 81.2106 884.138 79.7522C884.122 78.4265 883.732 77.3327 882.97 76.471C882.208 75.5927 881.139 74.8635 879.763 74.2835C878.404 73.6869 876.813 73.1566 874.99 72.6926L869.199 71.2011C865.006 70.1239 861.691 68.4916 859.255 66.3041C856.836 64.1 855.626 61.175 855.626 57.5292C855.626 54.5297 856.438 51.903 858.062 49.6492C859.703 47.3954 861.932 45.6471 864.749 44.4042C867.566 43.1447 870.756 42.515 874.319 42.515C877.932 42.515 881.097 43.1447 883.815 44.4042C886.549 45.6471 888.695 47.3789 890.253 49.5995C891.811 51.8036 892.615 54.3391 892.664 57.2061H883.79Z" fill="white"/>
+    </svg></a>
+
+    <h1 class="gate-title">Secure OpenClaw<br><span class="accent">VPS Setup Prompt</span></h1>
+
+    <p class="gate-subtitle">A free Claude Code prompt that walks you through setting up OpenClaw on your own server with proper security. 10 phases. Fully interactive. Paste it and follow along.</p>
+
+    <div class="gate-preview">
+      <p class="gate-preview-label">What's inside</p>
+      <ul>
+        <li>Choose your VPS provider (DigitalOcean, Hostinger, or other) and SSH in</li>
+        <li>Lock down access with Tailscale VPN so only your devices can reach the server</li>
+        <li>Install OpenClaw, connect Telegram, and configure the gateway securely</li>
+        <li>Set up firewall rules, dashboard access, and optional multi-model support</li>
+      </ul>
+    </div>
+
+    <div class="kit-form-wrapper">
+      <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+      <form action="https://app.kit.com/forms/9256972/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9256972" data-uid="81dc18fe91" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:false,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800" style="background-color: rgb(40, 40, 40); border-radius: 4px;">
+        <div class="formkit-background" style="opacity: 0.2;"></div>
+        <div data-style="minimal">
+          <div class="formkit-header" data-element="header" style="color: rgb(255, 255, 255); font-size: 27px; font-weight: 700;"><h2>Get the OpenClaw Setup</h2></div>
+          <div class="formkit-subheader" data-element="subheader" style="color: rgb(218, 218, 218); font-size: 18px;"><p>Drop your name and email to unlock the full setup prompt.</p></div>
+          <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+          <div data-element="fields" data-stacked="true" class="seva-fields formkit-fields">
+            <div class="formkit-field"><input class="formkit-input" aria-label="First Name" name="fields[first_name]" placeholder="First Name" type="text" style="color: rgb(164, 164, 164); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div>
+            <div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(164, 164, 164); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div>
+            <button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(0, 129, 68); border-radius: 4px; font-weight: 400;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">UNLOCK</span></button>
+          </div>
+          <div class="formkit-guarantee" data-element="guarantee" style="color: rgb(77, 77, 77); font-size: 13px; font-weight: 400;">We won't send you spam. Unsubscribe at any time.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FULL GUIDE (HIDDEN) ===== -->
+<section id="guide">
+  <div class="guide-inner">
+    <a href="https://aydanautomates.com" aria-label="Aydan Automates homepage"><svg class="guide-logo" viewBox="0 0 897 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M98.2393 104.832C90.3019 111.312 80.1656 115.2 69.1201 115.2C51.3428 115.2 35.9195 105.132 28.2344 90.3877H89.8994L98.2393 104.832ZM85.7529 26.1357C102.982 32.8071 115.2 49.5358 115.2 69.1201C115.2 78.1282 112.612 86.5305 108.144 93.6299L77.4639 40.4912L85.7529 26.1357ZM69.1201 23.04C69.7975 23.04 70.4714 23.057 71.1416 23.0859L40.4727 76.209H23.583C23.2262 73.8982 23.04 71.5308 23.04 69.1201C23.04 43.6708 43.6708 23.04 69.1201 23.04ZM81.7139 76.209H56.8428L69.2783 54.6699L81.7139 76.209Z" fill="white"/>
+      <path d="M163.998 94.1201H154.154L172.077 43.211H183.462L201.409 94.1201H191.565L177.968 53.6514H177.57L163.998 94.1201ZM164.321 74.1592H191.168V81.5668H164.321V74.1592ZM202.239 43.211H212.655L225.109 65.7323H225.606L238.06 43.211H248.475L229.956 75.1286V94.1201H220.758V75.1286L202.239 43.211ZM275.058 94.1201H257.806V43.211H275.406C280.46 43.211 284.802 44.2302 288.431 46.2686C292.077 48.2903 294.878 51.1987 296.833 54.9937C298.789 58.7887 299.767 63.3294 299.767 68.6159C299.767 73.9189 298.781 78.4762 296.809 82.2877C294.853 86.0993 292.028 89.0242 288.332 91.0626C284.653 93.1009 280.228 94.1201 275.058 94.1201ZM267.029 86.1407H274.61C278.157 86.1407 281.115 85.4944 283.485 84.2018C285.855 82.8926 287.636 80.9454 288.829 78.3602C290.022 75.7584 290.619 72.5103 290.619 68.6159C290.619 64.7214 290.022 61.4899 288.829 58.9213C287.636 56.336 285.871 54.4054 283.534 53.1294C281.214 51.8367 278.331 51.1904 274.884 51.1904H267.029V86.1407ZM315.132 94.1201H305.289L323.211 43.211H334.596L352.544 94.1201H342.7L329.103 53.6514H328.705L315.132 94.1201ZM315.456 74.1592H342.302V81.5668H315.456V74.1592ZM403.885 43.211V94.1201H395.682L371.694 59.4433H371.271V94.1201H362.049V43.211H370.302L394.265 77.9127H394.712V43.211H403.885ZM443.435 94.1201H433.591L451.514 43.211H462.898L480.846 94.1201H471.002L457.405 53.6514H457.007L443.435 94.1201ZM443.758 74.1592H470.604V81.5668H443.758V74.1592ZM522.443 43.211H531.665V76.471C531.665 80.1168 530.804 83.3235 529.08 86.091C527.373 88.8585 524.97 91.0212 521.871 92.5789C518.772 94.1201 515.151 94.8907 511.008 94.8907C506.849 94.8907 503.22 94.1201 500.121 92.5789C497.022 91.0212 494.619 88.8585 492.912 86.091C491.205 83.3235 490.351 80.1168 490.351 76.471V43.211H499.574V75.7004C499.574 77.8216 500.038 79.7108 500.966 81.368C501.91 83.0252 503.236 84.3261 504.943 85.2707C506.65 86.1987 508.672 86.6627 511.008 86.6627C513.345 86.6627 515.367 86.1987 517.074 85.2707C518.797 84.3261 520.123 83.0252 521.051 81.368C521.979 79.7108 522.443 77.8216 522.443 75.7004V43.211ZM542.252 50.9419V43.211H582.87V50.9419H567.135V94.1201H557.987V50.9419H542.252ZM636.734 68.6656C636.734 74.1509 635.707 78.849 633.652 82.76C631.614 86.6544 628.83 89.6374 625.3 91.7089C621.787 93.7804 617.801 94.8161 613.343 94.8161C608.885 94.8161 604.891 93.7804 601.362 91.7089C597.848 89.6208 595.064 86.6296 593.009 82.7352C590.971 78.8242 589.952 74.1343 589.952 68.6656C589.952 63.1802 590.971 58.4904 593.009 54.596C595.064 50.685 597.848 47.6937 601.362 45.6222C604.891 43.5507 608.885 42.515 613.343 42.515C617.801 42.515 621.787 43.5507 625.3 45.6222C628.83 47.6937 631.614 50.685 633.652 54.596C635.707 58.4904 636.734 63.1802 636.734 68.6656ZM627.462 68.6656C627.462 64.8043 626.858 61.5479 625.648 58.8964C624.455 56.2283 622.797 54.2148 620.676 52.8559C618.555 51.4804 616.111 50.7927 613.343 50.7927C610.576 50.7927 608.131 51.4804 606.01 52.8559C603.889 54.2148 602.223 56.2283 601.014 58.8964C599.82 61.5479 599.224 64.8043 599.224 68.6656C599.224 72.5268 599.82 75.7915 601.014 78.4596C602.223 81.1111 603.889 83.1246 606.01 84.5001C608.131 85.859 610.576 86.5384 613.343 86.5384C616.111 86.5384 618.555 85.859 620.676 84.5001C622.797 83.1246 624.455 81.1111 625.648 78.4596C626.858 75.7915 627.462 72.5268 627.462 68.6656ZM648.253 43.211H659.539L674.652 80.1002H675.249L690.363 43.211H701.648V94.1201H692.799V59.145H692.326L678.257 93.971H671.645L657.575 59.0704H657.103V94.1201H648.253V43.211ZM721.028 94.1201H711.185L729.107 43.211H740.492L758.44 94.1201H748.596L734.999 53.6514H734.601L721.028 94.1201ZM721.352 74.1592H748.198V81.5668H721.352V74.1592ZM759.556 50.9419V43.211H800.173V50.9419H784.438V94.1201H775.291V50.9419H759.556ZM810.804 94.1201V43.211H843.915V50.9419H820.026V64.7629H842.199V72.4937H820.026V86.3893H844.113V94.1201H810.804ZM883.79 57.2061C883.558 55.0351 882.58 53.3448 880.857 52.135C879.15 50.9253 876.929 50.3204 874.195 50.3204C872.273 50.3204 870.624 50.6104 869.248 51.1904C867.873 51.7704 866.82 52.5576 866.091 53.5519C865.362 54.5463 864.989 55.6814 864.973 56.9575C864.973 58.0181 865.213 58.9378 865.694 59.7167C866.191 60.4956 866.862 61.1585 867.707 61.7053C868.552 62.2356 869.489 62.6831 870.516 63.0477C871.543 63.4123 872.579 63.7188 873.623 63.9674L878.396 65.1606C880.318 65.608 882.166 66.2129 883.939 66.9752C885.729 67.7375 887.328 68.6987 888.737 69.8588C890.162 71.0188 891.289 72.4191 892.118 74.0597C892.946 75.7004 893.36 77.6227 893.36 79.8268C893.36 82.8097 892.598 85.4364 891.074 87.7068C889.549 89.9606 887.345 91.7255 884.461 93.0015C881.594 94.261 878.123 94.8907 874.046 94.8907C870.085 94.8907 866.646 94.2776 863.73 93.0512C860.83 91.8249 858.559 90.0351 856.919 87.6819C855.295 85.3287 854.416 82.4617 854.284 79.0811H863.357C863.489 80.8543 864.036 82.3292 864.998 83.5058C865.959 84.6824 867.21 85.5607 868.751 86.1407C870.309 86.7207 872.049 87.0107 873.971 87.0107C875.976 87.0107 877.733 86.7124 879.241 86.1159C880.766 85.5027 881.959 84.6575 882.821 83.5803C883.682 82.4866 884.122 81.2106 884.138 79.7522C884.122 78.4265 883.732 77.3327 882.97 76.471C882.208 75.5927 881.139 74.8635 879.763 74.2835C878.404 73.6869 876.813 73.1566 874.99 72.6926L869.199 71.2011C865.006 70.1239 861.691 68.4916 859.255 66.3041C856.836 64.1 855.626 61.175 855.626 57.5292C855.626 54.5297 856.438 51.903 858.062 49.6492C859.703 47.3954 861.932 45.6471 864.749 44.4042C867.566 43.1447 870.756 42.515 874.319 42.515C877.932 42.515 881.097 43.1447 883.815 44.4042C886.549 45.6471 888.695 47.3789 890.253 49.5995C891.811 51.8036 892.615 54.3391 892.664 57.2061H883.79Z" fill="white"/>
+    </svg></a>
+
+    <div class="guide-header">
+      <h1>Secure OpenClaw<br><span class="accent">VPS Setup Prompt</span></h1>
+    </div>
+
+    <p class="guide-intro">This is a single prompt you paste into Claude Code. It walks you through setting up OpenClaw on a fresh Debian 13 VPS from scratch, with every security step built in. It's interactive. It asks you for every value it needs (IPs, usernames, tokens). Nothing is hardcoded. Nothing is assumed. By the end, you'll have a fully locked-down OpenClaw instance running 24/7 on your own server.</p>
+
+    <!-- BLOCK 1: PREREQUISITES -->
+    <div class="day-block">
+      <p class="section-label">Prerequisites</p>
+      <h2>What you need before starting</h2>
+      <ul>
+        <li>A VPS from DigitalOcean, Hostinger, or any provider running Debian 13</li>
+        <li>A Tailscale account (free tier is fine)</li>
+        <li>A Telegram account</li>
+        <li>Claude Code installed on your local machine</li>
+        <li>An API key for your preferred LLM provider (Anthropic, OpenAI, etc.)</li>
+      </ul>
+    </div>
+
+    <!-- BLOCK 2: SECURITY NOTE -->
+    <div class="day-block">
+      <p class="section-label">Important</p>
+      <h2>A note on security</h2>
+      <p>This setup locks down your server at the infrastructure level. SSH is VPN-only, root is disabled, the gateway never touches the public internet. That's a strong foundation.</p>
+      <p>But there's one layer this can't fully protect against: prompt injection. If your OpenClaw agent interacts with external data (web searches, emails, downloaded files, API responses), that data could contain instructions designed to manipulate the agent's behavior. This is a known risk with all AI agents, not just OpenClaw.</p>
+      <p><strong>Best practices to reduce this risk:</strong></p>
+      <ul>
+        <li>Be selective about which skills you enable. Every skill is a new surface area.</li>
+        <li>Don't connect the agent to accounts that hold sensitive data.</li>
+        <li>Use separate, bot-only accounts for any service you connect.</li>
+        <li>Review what the agent is doing periodically, especially early on.</li>
+      </ul>
+      <p>No setup is bulletproof. This one is designed to be as tight as possible while still being practical.</p>
+    </div>
+
+    <!-- BLOCK 3: THE PROMPT -->
+    <div class="day-block">
+      <p class="section-label">Copy and paste this into Claude Code</p>
+      <h2>The prompt</h2>
+      <div class="prompt-box-wrapper">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+      <div class="prompt-box" id="prompt-text"><span class="prompt-heading"># Secure OpenClaw VPS Setup</span>
+
+You are helping me set up OpenClaw on a fresh Debian 13 VPS with proper security. Guide me through each phase interactively. After completing each phase, confirm success before moving on. Ask me for any values you need (IPs, usernames, passwords, tokens) -- don't assume them.
+
+<span class="prompt-heading">## Setup sequence</span>
+
+<span class="prompt-subheading">### Phase 1 -- Choose provider and SSH into VPS</span>
+
+Ask me which VPS provider I'm using (DigitalOcean, Hostinger, or other). Remember my choice for later phases where steps differ by provider.
+
+Then help me SSH into the VPS as root. I'll give you the IP. Remind me the password field won't show characters.
+
+<span class="prompt-subheading">### Phase 2 -- Install Tailscale VPN</span>
+
+<code>curl -fsSL https://tailscale.com/install.sh | sh</code>
+<code>tailscale up --ssh</code>
+
+- I'll authenticate via the URL it provides
+- Tell me to install Tailscale on my local machine and connect with the same account
+- Verify with <code>tailscale status</code>
+- Have me grab the server's Tailscale IP (100.x.x.x) from the admin console
+
+<span class="prompt-subheading">### Phase 3 -- Create non-root user</span>
+
+Ask me for a username. Then:
+
+<code>adduser &lt;USERNAME&gt;</code>
+<code>usermod -aG sudo &lt;USERNAME&gt;</code>
+
+Verify with <code>su - &lt;USERNAME&gt;</code> then <code>sudo whoami</code> (should return <code>root</code>), then <code>logout</code> back to root.
+
+<span class="prompt-subheading">### Phase 4 -- Lock down SSH</span>
+
+Edit <code>/etc/ssh/sshd_config</code>:
+
+- Set <code>ListenAddress</code> to the Tailscale IP
+- Set <code>PasswordAuthentication no</code>
+- Set <code>PermitRootLogin no</code>
+
+Then:
+
+<code>systemctl restart ssh</code>
+<code>logout</code>
+
+Have me verify: <code>ssh root@&lt;VPS_IP&gt;</code> should fail. <code>ssh &lt;USERNAME&gt;@&lt;TAILSCALE_IP&gt;</code> should work. Disconnecting Tailscale should block access.
+
+<span class="prompt-subheading">### Phase 5 -- Install OpenClaw</span>
+
+SSH in as the non-root user via Tailscale, then run the OpenClaw install one-liner from their site.
+
+Interactive setup choices:
+
+- Security prompt → Yes
+- Configuration → Manual
+- Gateway → Local
+- Workspace → Default
+- Model → Ask me which provider (OpenAI Codex, Anthropic token, or API key)
+- Gateway port → Default (18789)
+- Gateway bind → Loopback
+- Token auth → Yes
+- Tailscale exposure → Off
+- Gateway token → Auto-generate (leave blank)
+
+<span class="prompt-subheading">### Phase 6 -- Connect Telegram</span>
+
+1. Message @BotFather in Telegram → <code>/newbot</code> → set name and username (must end in <code>bot</code>)
+2. Paste bot token into OpenClaw setup
+3. Finish channels → DM policies: Yes → Pairing → Skills: No for now
+4. Gateway service: Yes → Node
+5. Hatch bot in terminal UI
+6. In Telegram, press Start on the bot, then run the pairing command it gives
+7. Remind me to clear the BotFather chat so the token isn't exposed
+
+<span class="prompt-subheading">### Phase 7 -- VPS provider firewall</span>
+
+Based on the provider I chose in Phase 1, walk me through setting up the firewall in their specific dashboard. The rules are the same regardless of provider:
+
+- Accept / UDP / Port 41641 / Source: Anywhere (Tailscale port)
+- Do NOT open TCP 22
+- Only open TCP 80 + 443 if serving a public website later
+
+For DigitalOcean: Networking → Firewalls → Create Firewall → apply to the droplet.
+For Hostinger: Dashboard → Security → Firewall → Create.
+For other providers: Guide me through finding the firewall settings and applying these rules.
+
+<span class="prompt-subheading">### Phase 8 -- Access the dashboard</span>
+
+Port-forward from a separate terminal:
+
+<code>ssh -N -L 18789:127.0.0.1:18789 &lt;USERNAME&gt;@&lt;TAILSCALE_IP&gt;</code>
+
+Open <code>http://localhost:18789?token=&lt;GATEWAY_TOKEN&gt;</code> in browser. If I don't have the token, tell me to ask the bot in Telegram.
+
+<span class="prompt-subheading">### Phase 9 -- Optional: Add second LLM provider</span>
+
+<code>openclaw configure</code> → Model → Anthropic → Token. Get the token by running <code>claude setup token</code> from a machine with Claude Code installed.
+
+<span class="prompt-subheading">### Phase 10 -- Enable skills</span>
+
+<code>openclaw configure</code> → Skills. Warn me to evaluate each skill's data inputs/outputs before enabling.
+
+<span class="prompt-heading">## Security rules to enforce throughout</span>
+
+- Never connect primary accounts (Gmail, Drive, etc.) -- always use separate accounts created for the bot
+- If connecting email, only forward from verified senders to the bot's email
+- Set API spending limits and email alerts if using API keys
+- The bot intentionally doesn't know the sudo password -- don't change this
+- Any service the bot exposes on another port needs its own SSH port-forward:
+  <code>ssh -N -L &lt;PORT&gt;:127.0.0.1:&lt;PORT&gt; &lt;USERNAME&gt;@&lt;TAILSCALE_IP&gt;</code>
+- Other devices need Tailscale installed + same account to access the server</div>
+      </div>
+    </div>
+
+    <!-- OUTRO -->
+    <div class="outro">
+      <p><strong style="font-size: 20px; color: #F5F5F5;">That's the whole setup.</strong></p>
+      <p>Paste the prompt into Claude Code, follow the phases, and you'll have a secure OpenClaw instance running on your own server. If you get stuck on any step, Claude will help you debug it in real time.</p>
+      <p>For more guides, tutorials, and practical AI tips:</p>
+      <ul>
+        <li><span class="social-handle">@aydantheaiguy</span> on <a href="https://www.tiktok.com/@aydantheaiguy" target="_blank" rel="noopener">TikTok</a>, <a href="https://www.instagram.com/aydantheaiguy" target="_blank" rel="noopener">Instagram</a>, and <a href="https://www.youtube.com/@aydantheaiguy" target="_blank" rel="noopener">YouTube</a></li>
+        <li><span class="social-handle">Aydan Automates</span> on <a href="https://www.linkedin.com/company/aydan-automates" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li>Visit <a href="https://aydanautomates.com">aydanautomates.com</a> for coaching, consulting, and custom AI systems</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script src="/freebies/gate.js" data-gate-id="openclaw-secure-setup"></script>
+<script>
+function copyPrompt(btn) {
+  var el = document.getElementById('prompt-text');
+  var text = el.innerText || el.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Guides | Aydan Automates</title>
+  <meta name="description" content="Free AI guides and resources to help you get started with automation. No fluff, just practical steps.">
+  <link rel="canonical" href="https://aydanautomates.com/free-guides">
+  <meta property="og:title" content="Free Guides | Aydan Automates">
+  <meta property="og:description" content="Free AI guides and resources to help you get started with automation. No fluff, just practical steps.">
+  <meta property="og:url" content="https://aydanautomates.com/free-guides">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aydan Automates">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Guides | Aydan Automates">
+  <meta name="twitter:description" content="Free AI guides and resources to help you get started with automation. No fluff, just practical steps.">
+  <link rel="icon" type="image/svg+xml" href="/Favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg-light: #111111;
+      --bg-card: #1A1A1A;
+      --bg-card-hover: #222222;
+      --border: #2A2A2A;
+      --text: #F5F5F5;
+      --text-body: #CCCCCC;
+      --text-secondary: #AAAAAA;
+      --text-muted: #888888;
+      --text-dim: #767676;
+      --font-mono: 'PT Mono', monospace;
+      --font-sans: 'DM Sans', sans-serif;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-body);
+      background: var(--bg);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 88px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: 48px;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links li {
+      display: flex;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      padding: 4px 0;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav-links a:not(.btn-primary)::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:not(.btn-primary):hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .btn-primary {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a.btn-primary {
+      padding: 10px 24px;
+      font-size: 0.75rem;
+    }
+
+    .nav-links .btn-primary:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .nav-hamburger { display: none; }
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-mobile.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-mobile a {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--text-muted);
+    }
+
+    .nav-mobile .btn-primary {
+      margin-top: 16px;
+      color: var(--bg);
+    }
+
+    /* ===== PAGE CONTENT ===== */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 160px 40px 100px;
+    }
+
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: var(--font-mono);
+      font-size: clamp(1.85rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 64px;
+    }
+
+    /* ===== GUIDE CARDS ===== */
+    .guides-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .guide-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .guide-card:hover {
+      background: var(--bg-card-hover);
+      border-color: #333333;
+    }
+
+    .guide-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .guide-card-title {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .guide-card-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .guide-card-cta {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--bg);
+      background: var(--text);
+      border: 1px solid var(--text);
+      padding: 12px 28px;
+      transition: background 0.2s ease, color 0.2s ease;
+      align-self: flex-start;
+    }
+
+    .guide-card-cta:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover { color: var(--text); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 767px) {
+      .nav-inner {
+        padding: 0 24px;
+        height: 72px;
+      }
+
+      .nav-logo span {
+        font-size: 1.3rem;
+        letter-spacing: 0.12em;
+      }
+
+      .nav-logo img {
+        height: 36px;
+        width: 36px;
+      }
+
+      .page {
+        padding: 130px 24px 80px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-logo span {
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+      }
+
+      .nav-logo img {
+        height: 32px;
+        width: 32px;
+      }
+
+      .nav-logo {
+        gap: 10px;
+      }
+
+      .page {
+        padding: 120px 18px 64px;
+      }
+
+      .guide-card {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Aydan Automates, home">
+        <img src="/logo.svg" alt="Aydan Automates logo">
+        <span>Aydan Automates</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#testimonials">Testimonials</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/free-guides">Free Guides</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/#contact" class="btn-primary">Book a Call</a></li>
+      </ul>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="nav-mobile" aria-hidden="true">
+      <a href="/#services">Services</a>
+      <a href="/#testimonials">Testimonials</a>
+      <a href="/#about">About</a>
+      <a href="/free-guides">Free Guides</a>
+      <a href="/#contact">Contact</a>
+      <a href="/#contact" class="btn-primary">Book a Call</a>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    <p class="page-label">Resources</p>
+    <h1 class="page-title">Free Guides</h1>
+    <p class="page-subtitle">Practical guides to help you start using AI. No fluff, no jargon, just steps you can follow today.</p>
+
+    <div class="guides-grid">
+
+      <div class="guide-card">
+        <p class="guide-card-label">7-Day Guide</p>
+        <h2 class="guide-card-title">Zero to Automation in One Week</h2>
+        <p class="guide-card-desc">Go from never using AI to automating your first workflow. One task per day, 15–30 minutes max. No technical background needed.</p>
+        <a href="/freebies/zero-to-automation/" class="guide-card-cta">Get Started</a>
+      </div>
+
+      <div class="guide-card">
+        <p class="guide-card-label">Setup Prompt</p>
+        <h2 class="guide-card-title">Secure OpenClaw VPS Setup</h2>
+        <p class="guide-card-desc">A Claude Code prompt that walks you through setting up OpenClaw on your own server with full security. 10 phases, fully interactive.</p>
+        <a href="/freebies/openclaw-secure-setup/" class="guide-card-cta">Get Started</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Aydan Automates. <a href="/privacy">Privacy Policy</a></p>
+  </footer>
+
+  <!-- MOBILE MENU JS -->
+  <script>
+    (function () {
+      var hamburger = document.querySelector('.nav-hamburger');
+      var mobileMenu = document.querySelector('.nav-mobile');
+      var mobileLinks = mobileMenu.querySelectorAll('a');
+
+      function toggleMenu() {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', toggleMenu);
+      });
+    })();
+  </script>
+</body>
+</html>

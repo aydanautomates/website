@@ -40,7 +40,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
   <style>
     /* ========================================
        RESET & BASE
@@ -61,7 +61,7 @@
       --text-muted: #888888;
       --text-dim: #767676;
       --font-mono: 'PT Mono', monospace;
-      --font-sans: 'PT Sans', sans-serif;
+      --font-sans: 'DM Sans', sans-serif;
     }
 
     html {
@@ -485,9 +485,28 @@
 
     .hero-cta-wrapper {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      align-items: center;
       gap: 16px;
+    }
+
+    .btn-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 16px 36px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--text);
+      color: var(--bg);
     }
 
     .hero-cta-note {
@@ -511,6 +530,28 @@
     .hero-headline { animation-delay: 0.4s; }
     .hero-sub { animation-delay: 0.6s; }
     .hero-cta-wrapper { animation-delay: 0.8s; }
+
+    .hero-scroll-arrow {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+    }
+
+    .hero-scroll-arrow svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--text-muted);
+      animation: bounceArrow 2s ease-in-out infinite;
+    }
+
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
 
     @keyframes fadeUp {
       to {
@@ -1076,6 +1117,11 @@
         min-height: -webkit-fill-available;
       }
 
+      .hero-content {
+        padding-top: 10vh;
+        padding-bottom: 40px;
+      }
+
       .hero-sub {
         font-size: 1.05rem;
       }
@@ -1204,7 +1250,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="free-guides">Free Guides</a></li>
         <li><a href="#contact" class="btn-primary">Book a Call</a></li>
       </ul>
 
@@ -1219,7 +1265,7 @@
       <a href="#services">Services</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="free-guides">Free Guides</a>
       <a href="#contact" class="btn-primary">Book a Call</a>
     </div>
   </nav>
@@ -1239,8 +1285,14 @@
           <p class="hero-sub">Coaching, consulting, and custom AI solutions that actually save you time and money. Built around your goals, your workflows, and the tools you already trust.</p>
           <div class="hero-cta-wrapper">
             <a href="#contact" class="btn-primary">Book Your Free Call</a>
+            <a href="free-guides" class="btn-secondary">Access Free Guides</a>
           </div>
         </div>
+      </div>
+      <div class="hero-scroll-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 10l5 5 5-5"/>
+        </svg>
       </div>
     </section>
 
@@ -2006,6 +2058,12 @@
             if (response.ok) {
               contactForm.style.display = 'none';
               formSuccess.style.display = 'block';
+              // Log to Google Sheets
+              fetch('https://script.google.com/macros/s/AKfycbxan9vQMP49Po1lFmJN_qCKF5blKOEpdOUMsnfCFG6_DRX6pkfImWqmFCYhu0-U6Y43/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(data),
+              }).catch(function () {});
             } else {
               submitBtn.textContent = 'Something went wrong. Try again.';
               submitBtn.disabled = false;
